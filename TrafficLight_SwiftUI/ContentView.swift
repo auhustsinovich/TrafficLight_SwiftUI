@@ -8,22 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    enum CurrentLight {
+    private enum CurrentLight {
         case off, red, yellow, green
     }
     
     @State private var buttonTitle = "START"
     @State private var currentLight = CurrentLight.off
-    
-    private func changeColor() {
-        
-        switch currentLight {
-        case .off: currentLight = .red
-        case .red: currentLight = .yellow
-        case .yellow: currentLight = .green
-        case .green: currentLight = .red
-        }
-    }
     
     var body: some View {
         ZStack {
@@ -37,12 +27,23 @@ struct ContentView: View {
                 TrafficLightView(color: .green, opacity: currentLight == .green ? 1 : 0.5)
                 
                 Spacer()
-                TrafficLightButton(title: buttonTitle, action: { if buttonTitle == "START" {
+                TrafficLightButton(title: buttonTitle) {
+                    if buttonTitle == "START" {
                     buttonTitle = "NEXT"
                 }
                     changeColor()
-                })
+                }
             }
+        }
+    }
+    
+    private func changeColor() {
+        
+        switch currentLight {
+        case .off: currentLight = .red
+        case .red: currentLight = .yellow
+        case .yellow: currentLight = .green
+        case .green: currentLight = .red
         }
     }
 }

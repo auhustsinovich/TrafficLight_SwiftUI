@@ -13,8 +13,8 @@ struct TrafficLightButton: View {
     let action: () -> Void
     
     var body: some View {
-        Button(action: action, label: {
-            Text("\(title)")
+        Button(action: action){
+            Text(title)
                 .foregroundColor(.white)
                 .font(.system(size: 50, weight: Font.Weight.medium))
                 .frame(width: 200, height: 70)
@@ -26,7 +26,7 @@ struct TrafficLightButton: View {
                 )
             
                 .padding(.bottom,20)
-        })
+        }
     }
 }
 
